@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: url('https://source.unsplash.com/1600x900/?wedding,flowers') no-repeat center center/cover;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* Floating Hearts Animation */
+        @keyframes hearts {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            height: 20px;
+            background-color: rgb(255, 110, 135);
+            border-radius: 50%;
+            animation: hearts 5s linear infinite;
+        }
+
+        .invitation {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            margin: auto;
+            position: relative;
+            animation: fadeIn 2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 50px;
+            color: #b8860b;
+            text-shadow: 0 0 10px #ffd700;
+        }
+
+        /* Typing Effect */
+        .typing {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid;
+            animation: typing 3s steps(20) forwards, blink 0.7s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .date {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #4d2600;
+        }
+
+        .button {
+            background: #8b0000;
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .button:hover {
+            background: #600000;
+            transform: scale(1.1);
+        }
+
+        /* Countdown Timer */
+        #countdown {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff4500;
+            margin: 20px 0;
+        }
+
+        /* RSVP Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: modalFade 0.5s ease-in-out;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translate(-50%, -55%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        .modal .close {
+            cursor: pointer;
+            color: #8b0000;
+            font-size: 18px;
+            display: block;
+            margin-top: 20px;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .invitation {
+                padding: 30px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            .date, #countdown {
+                font-size: 18px;
+            }
+
+            .button {
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <!-- Floating Hearts -->
+    <script>
+        for (let i = 0; i < 20; i++) {
+            let heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            document.body.appendChild(heart);
+        }
+    </script>
+
+    <div class="invitation">
+        <h1>Wedding Invitation</h1>
+        <p>You are cordially invited to celebrate the joyous union of</p>
+        <h2 class="typing">Syed Nazeer Ahmed & Laiba Naeem</h2>
+        <p class="date">💛 Mayoon: 16 June 2025 at Home</p>
+        <p class="date">❤️ Baraat: 17 June 2025 at A1 Banquiet</p>
+        <p class="date">💖 Valima: 18 June 2025 at Al Shaikh Banquiet</p>
+        <p id="countdown"></p>
+        <h3>Contact</h3> <br>
+        <p class="Nazeer">Nazeer Ahmed: 0303432247014</p> 
+        <p class="Taha">Ali Hassan: 03113882409</p> <br>
+        <button class="button" onclick="openModal()">RSVP Now</button>
+    </div>
+
+    <!-- RSVP Modal -->
+    <div class="modal" id="rsvpModal">
+        <p>Thank you for your RSVP! We can't wait to celebrate with you. 🎊</p>
+        <span class="close" onclick="closeModal()">Close</span>
+    </div>
+
+    
+    <script>
+        function openModal() {
+            document.getElementById('rsvpModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('rsvpModal').style.display = 'none';
+        }
+
+
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('June 16, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').innerText = `🎉 Only ${days} days left! 🎊`;
+        }
+        
+
+        setInterval(updateCountdown, 1000);
+    </script>
+<!-- RSVP Modal -->
+    <div class="modal" id="rsvpModal">
+        <p>Thank you for your RSVP! We can't wait to celebrate with you. 🎊</p>
+        <span class="close" onclick="closeModal()">Close</span>
+    </div>
+
+
+</body>
+</html>
